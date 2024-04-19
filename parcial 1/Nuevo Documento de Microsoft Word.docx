@@ -1,0 +1,314 @@
+
+#include <iostream>
+using namespace std;
+const int k=1;
+const int r=3;
+int matrizfunc(int filas, int k, int r) {
+    // Código para generar la primera matriz
+    int mitad, columnas;
+    columnas = filas; // Corrección: usar el operador de asignación en lugar del operador de comparación
+    mitad = (filas * columnas / 2) + 1;
+    // Crear un puntero para el arreglo de punteros de filas
+    int** matriz = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matriz[i] = new int[columnas];
+        //cout<<*matriz[i];
+    }
+    int** matrizRotada = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matrizRotada[i] = new int[columnas];
+    }
+    // Rellenar la matriz con valores de ejemplo (solo para demostración)
+    int contador = 1;
+    int segundavez = 0;
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
+            if (contador == mitad && segundavez == 0) {
+                matriz[i][j] = 0; // Asignar cero en la mitad de la matriz
+                contador = contador++;
+                segundavez++;
+            } else {
+                matriz[i][j] = contador++; // Asignar números en el resto de la matriz
+            }
+            cout<<matriz[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    int posicion_deseada = matriz[k- 1][r- 1];
+    // Liberar la memoria asignada
+    for (int i = 0; i < filas; ++i) {
+        delete[] matriz[i];
+    }
+    delete[] matriz;
+    return posicion_deseada;
+} // Corrección: agregar un corchete de cierre para cerrar la definición de la función
+
+int funcionvoltear1(int filas, int k, int r) {
+    // Código para generar la segunda matriz
+    int columnas, mitad;
+    columnas= filas; // Corrección: usar el operador de asignación en lugar del operador de comparación
+    mitad = (filas * columnas / 2) + 1;
+    // Crear un puntero para el arreglo de punteros de filas
+    int** matriz = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matriz[i] = new int[columnas];
+    }
+   
+    int** matrizRotada = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matrizRotada[i] = new int[columnas];
+    }
+
+    // Rellenar la matriz con valores de ejemplo (solo para demostración)
+    int contador = 1;
+    int segundavez = 0;
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
+            if (contador == mitad && segundavez == 0) {
+                matriz[i][j] = 0; // Asignar cero en la mitad de la matriz
+                contador = contador++;
+                segundavez++;
+            } else {
+                matriz[i][j] = contador++; // Asignar números en el resto de la matriz
+            }
+        //cout<<matriz[i][j]<<" ";
+        }
+        //cout<<endl;
+    }    
+    // Rotar la matriz
+    for (int j = columnas - 1; j >= 0; j--) {
+        for (int i = 0; i < filas; i++) {
+            matrizRotada[j][i] = matriz[i][j]; // Intercambiar filas por columnas
+            cout<<matrizRotada[j][i]<<" ";
+        }
+        cout<<endl;
+    }
+    int posicion_deseada1 = matrizRotada[k - 1][r- 1];
+    for (int i = 0; i < filas; ++i) {
+        delete[] matriz[i];
+        delete[] matrizRotada[i];
+    }
+    delete[] matriz;
+    delete[] matrizRotada;
+    return posicion_deseada1+ (columnas/2)+ 1;
+    cout<<endl;
+}
+
+int funcionvoltear2(int filas, int k, int r) {
+    int columnas, mitad;
+    columnas= filas; // Corrección: usar el operador de asignación en lugar del operador de comparación
+    mitad = (filas * columnas / 2) + 1;
+    // Crear un puntero para el arreglo de punteros de filas
+    int** matriz = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matriz[i] = new int[columnas];
+    }
+    int** matrizRotada = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matrizRotada[i] = new int[columnas];
+    }
+    // Rellenar la matriz con valores de ejemplo (solo para demostración)
+    int contador = filas * filas - 1;
+    int segundavez = 0;
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
+            if (contador == mitad - 1 && segundavez == 0) {
+                matriz[i][j] = 0; // Asignar cero en la mitad de la matriz
+                contador = contador--;
+                segundavez++;
+            } else {
+                matriz[i][j] = contador--; // Asignar números en el resto de la matriz
+            }
+        }
+    }
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matrizRotada[j][i] = matriz[i][j]; // Intercambiar filas por columnas
+            cout<<matrizRotada[j][i]<<" ";
+    }
+    cout<<endl;
+}
+    int posicion_deseada2=matriz[k- 1][r- 1];
+    // Liberar la memoria asignada
+    for (int i = 0; i < filas; ++i) {
+        delete[] matriz[i];
+        delete[] matrizRotada[i];
+    }
+    delete[] matriz;
+    delete[] matrizRotada;
+    return posicion_deseada2;
+    cout<<endl;
+}
+
+int funcionvoltear3(int filas, int k, int r) {
+    int columnas = filas; // Corrección: usar el operador de asignación en lugar del operador de comparación
+    int mitad = (filas * columnas / 2) + 1;
+   
+    // Crear un puntero para el arreglo de punteros de filas
+    int** matriz = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matriz[i] = new int[columnas];
+    }
+    int** matrizRotada = new int*[filas];
+
+    // Crear cada fila como un arreglo dinámico de columnas
+    for (int i = 0; i < filas; ++i) {
+        matrizRotada[i] = new int[columnas];
+    }
+
+    // Rellenar la matriz con valores de ejemplo (solo para demostración)
+    int contador = 1;
+    int segundavez = 0;
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
+            if (contador == mitad && segundavez == 0) {
+                matriz[i][j] = 0; // Asignar cero en la mitad de la matriz
+                contador = contador++;
+                segundavez++;
+            } else {
+                matriz[i][j] = contador++; // Asignar números en el resto de la matriz
+            }
+        }
+    }
+
+    // Rotar la matriz
+    for (int i = filas - 1; i >= 0; --i) {
+        for (int j = 0; j < columnas; ++j) {
+            matrizRotada[filas - 1 - j][i] = matriz[i][j];
+            cout<<matrizRotada[i][filas - 1 - j]<<" ";
+        }
+        cout<<endl;
+    }
+    // Obtener el valor deseado de la matriz rotada
+    int posicion_deseada3 = matrizRotada[k- 1][r- 1];
+    // Liberar la memoria asignada
+    for (int i = 0; i < filas; ++i) {
+        delete[] matriz[i];
+        delete[] matrizRotada[i];
+    }
+    delete[] matriz;
+    delete[] matrizRotada;
+    return posicion_deseada3;
+    cout<<endl;
+}
+/*int** funcionvermayoromenor(int* X) {
+    int k = 1; // Añadido para definir k
+    int r = 3; // Añadido para definir r
+    int x = k + 1;
+    int y = r + 1;
+    //int X[] = {3, 4, -1, 1};
+    int longitudX = sizeof(X) / sizeof(X[0]);
+   
+    int** matriz = new int*[longitudX];
+    for(int i = 0; i < longitudX; ++i)
+        matriz[i] = new int[longitudX];
+   
+    for(int M = 0; M < longitudX; M++) {
+        if (X[M] == -1) {
+            for (int i = 0; i < longitudX - 1; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (matrizfunc(X[i], k, r) > matrizfunc(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << matrizfunc(X[i + 1], x, y);
+                        matriz[i][j] = matrizfunc(X[i + 1], x, y);
+                        break;
+                    }
+                    if (matrizfunc(X[i], k, r) > funcionvoltear1(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << funcionvoltear1(X[i + 1], x, y);
+                        matriz[i][j] = funcionvoltear1(X[i + 1], x, y);
+                        break;
+                    }
+                    if (matrizfunc(X[i], k, r) > funcionvoltear2(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << funcionvoltear2(X[i + 1], x, y);
+                        matriz[i][j] = funcionvoltear2(X[i + 1], x, y);
+                        break;
+                    }
+                    if (matrizfunc(X[i], k, r) > funcionvoltear3(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << funcionvoltear3(X[i + 1], x, y);
+                        matriz[i][j] = funcionvoltear3(X[i + 1], x, y);
+                        break;
+                    }
+                    if (i == i) {
+                        X[i + 1] = X[i + 1] +  2;
+                    }
+                }
+            }
+        }
+    }
+
+    for (int M = 0; M < longitudX; M++) {
+        if (X[M] == 1) {
+            for (int i = 0; i < longitudX - 1; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (matrizfunc(X[i], k, r) > matrizfunc(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << matrizfunc(X[i + 1], x, y);
+                        matriz[i][j] = matrizfunc(X[i + 1], x, y);
+                        break;
+                    }
+                    if (matrizfunc(X[i], k, r) > funcionvoltear1(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << funcionvoltear1(X[i + 1], x, y);
+                        matriz[i][j] = funcionvoltear1(X[i + 1], x, y);
+                        break;
+                    }
+                    if (matrizfunc(X[i], k, r) > funcionvoltear2(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << funcionvoltear2(X[i + 1], x, y);
+                        matriz[i][j] = funcionvoltear2(X[i + 1], x, y);
+                        break;
+                    }
+                    if (matrizfunc(X[i], k, r) > funcionvoltear3(X[i + 1], x, y)) {
+                        cout << "Si hay compatibilidad en el primero y es: " << funcionvoltear3(X[i + 1], x, y);
+                        matriz[i][j] = funcionvoltear3(X[i + 1], x, y);
+                        break;
+                    }
+                    if (i == longitudX - 2) {
+                        X[i + 1] = X[i + 1] - 2;
+                    }
+                }
+            }
+        }
+    }
+    for (int i = 0; i < longitudX; ++i) {
+        cout << matriz[i] << " ";
+    }
+    cout << endl;
+    return matriz;
+}
+*/
+
+int main() {
+    int arrmatrices[] = {3, 5, 7};
+    int X[] = {1, 1};
+    int longitudarrmatices = sizeof(arrmatrices) / sizeof(arrmatrices[0]);
+    int longitudX = sizeof(X) / sizeof(X[0]);
+    int posicionx = X[0];
+    int posiciony = X[1];
+    if(k> arrmatrices[0]- 1)
+        arrmatrices[0]=arrmatrices[0]+ 2;
+    //int** clave= funcionvermayoromenor(X);
+        //cout<<clave;
+
+    int posicion=matrizfunc(arrmatrices[0],k,r);
+    //cout<<posicion;
+    int posicion1=funcionvoltear1(arrmatrices[0],k,r);
+    //cout<<posicion1;    
+    int posicion2=funcionvoltear2(arrmatrices[0],k,r);
+    //cout<<posicion2;
+    int posicion3=funcionvoltear3(arrmatrices[0],k,r); // Debes especificar qué valor de filas deseas utilizar aquí
+    //cout<<posicion3;
+   
+
+    return 0;
+}
